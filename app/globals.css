@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@font-face { font-family:"Beginning Display"; src:url("../font/No.175-ShangShouChaoWanTi-2.ttf") format("truetype"); font-style:normal; font-weight:400; font-display:swap; }
+
+:root { --display-font:"Beginning Display","Noto Serif SC",serif; --ink:#111827; --cream:#f5f7fb; --paper:#fff; --wine:#9a641f; --gold:#f4c66f; --sage:#6f8fbd; --line:rgba(255,255,255,.14); --ios-blue:#0a84ff; --ios-fill:rgba(255,255,255,.1); --ios-text:#f7f8fc; --ios-secondary:rgba(231,237,248,.66); }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; scroll-padding-top:76px; -webkit-text-size-adjust:100%; }
+body { margin:0; min-width:0; overflow-x:clip; background:#020713; color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Noto Sans SC","Microsoft YaHei",sans-serif; }
+button,input { font:inherit; }
+button,a { -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+a { color:inherit; text-decoration:none; }
+
+/* Brand mark: reused by the campaign topbar and the privacy footer. */
+.brand { display:flex; align-items:center; gap:10px; font-family:serif; letter-spacing:.08em; font-weight:700; }
+.brand-mark { width:30px; height:30px; display:grid; place-items:center; border:1px solid currentColor; border-radius:50%; }
+
+/* Language toggle: reused by the campaign, privacy, and admin headers. */
+.language-switch { border:1px solid rgba(255,255,255,.3); background:rgba(255,255,255,.08); color:inherit; border-radius:999px; width:30px; height:30px; display:grid; place-items:center; font-size:11px; font-weight:700; letter-spacing:.02em; cursor:pointer; }
+.language-switch:hover { background:rgba(255,255,255,.2); }
+
+@media (max-width:800px) {
+  html { scroll-padding-top:64px; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  *,*::before,*::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; }
+}

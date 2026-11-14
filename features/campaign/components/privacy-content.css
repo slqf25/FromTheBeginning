@@ -1,0 +1,28 @@
+/* Styles for PrivacyContent only. */
+
+.privacy-page { position:relative; min-height:100svh; overflow:hidden; padding:64px 20px 90px; background:#020713; color:#f5f7fc; }
+.privacy-glow { position:fixed; inset:-20% 0 auto; height:70vh; pointer-events:none; background:radial-gradient(circle at 50% 10%,rgba(244,198,111,.2),rgba(46,94,168,.06) 34%,transparent 61%); }
+.privacy-document { position:relative; width:min(780px,100%); margin:auto; }
+.privacy-header { padding-bottom:42px; margin-bottom:38px; border-bottom:1px solid rgba(255,255,255,.14); }
+.privacy-header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:46px; }
+.privacy-back { display:inline-flex; align-items:center; gap:7px; color:rgba(245,245,247,.65); font-size:12px; }
+.privacy-mark { width:42px; height:42px; display:grid; place-items:center; margin-bottom:22px; border-radius:14px; color:#f6e6c8; background:rgba(255,255,255,.08); }
+.privacy-header p { margin:0 0 10px; color:#e3b85f; font-size:10px; font-weight:700; letter-spacing:.22em; }
+.privacy-header h1 { margin:0 0 14px; font-size:clamp(42px,8vw,68px); font-weight:630; letter-spacing:-.055em; }
+.privacy-header>span:last-child { color:rgba(245,245,247,.5); font-size:11px; }
+.privacy-document>section { padding:0 0 34px; }
+.privacy-document h2 { margin:0 0 13px; font-size:19px; font-weight:620; letter-spacing:-.025em; }
+.privacy-document p,.privacy-document li { color:rgba(245,245,247,.7); font-size:14px; line-height:1.9; }
+.privacy-document p { margin:0 0 11px; }
+.privacy-document ul { margin:0; padding-left:20px; }
+.privacy-document li+li { margin-top:5px; }
+.privacy-footer { max-width:none; margin-top:24px; padding:30px 0 0; border-top:1px solid rgba(255,255,255,.14); }
+.privacy-footer>a { color:rgba(245,245,247,.65); }
+
+footer { max-width:1120px; margin:auto; padding:26px 24px 56px; display:flex; align-items:center; justify-content:space-between; color:rgba(226,234,248,.65); font-size:10px; letter-spacing:.14em; }
+footer .brand { color:#f8f4e9; font-size:14px; }
+footer a { display:flex; align-items:center; gap:6px; }
+
+@media (max-width:800px) {
+  footer { flex-direction:column; gap:22px; text-align:center; padding-bottom:calc(44px + env(safe-area-inset-bottom)); }
+}

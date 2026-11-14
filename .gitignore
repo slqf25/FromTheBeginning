@@ -1,0 +1,59 @@
+# Dependencies and package-manager state
+/node_modules/
+/.pnp
+.pnp.*
+/.yarn/*
+!/.yarn/patches/
+!/.yarn/plugins/
+!/.yarn/releases/
+!/.yarn/versions/
+
+# Framework, build, and generated output
+/.next/
+/dist/
+/out/
+/.vercel/
+next-env.d.ts
+*.tsbuildinfo
+
+# Tests and reports
+/coverage/
+/test-results/
+/playwright-report/
+/.nyc_output/
+
+# Environment variables and credentials
+.env
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Logs and debug output
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Workspace and deployment artifacts
+*.tar.gz
+
+# Editor and operating-system metadata
+/.idea/
+/.vscode/*
+!/.vscode/extensions.json
+!/.vscode/settings.json
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*~
