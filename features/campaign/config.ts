@@ -28,8 +28,7 @@ export function availableWeekNumbers(runtime: CampaignRuntime, now = new Date())
   return campaign.weeks
     .filter((week) => {
       if (preview !== null) return week.number <= preview;
-      const hasPublishedContent = Boolean(youtubeEmbedUrl(runtime[`VIDEO_URL_${week.number}`]));
-      return hasPublishedContent && now >= weekStart(week.isoDate);
+      return now >= weekStart(week.isoDate);
     })
     .map((week) => week.number);
 }
@@ -42,8 +41,7 @@ export function openWeekNumbers(runtime: CampaignRuntime, now = new Date()) {
     .filter((week) => {
       const start = weekStart(week.isoDate);
       const end = new Date(start.getTime() + 7 * 24 * 60 * 60 * 1000);
-      const hasPublishedContent = Boolean(youtubeEmbedUrl(runtime[`VIDEO_URL_${week.number}`]));
-      return hasPublishedContent && now >= start && now < end;
+      return now >= start && now < end;
     })
     .map((week) => week.number);
 }
