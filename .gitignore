@@ -57,3 +57,7 @@ Desktop.ini
 *.temp
 *.swp
 *~
+
+# Local AI assistant instructions (not meant for the shared repo)
+/CLAUDE.md
+/AGENTS.md
