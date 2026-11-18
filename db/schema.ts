@@ -34,3 +34,9 @@ export const admins = pgTable("admins", {
   role: text("role").notNull().default("admin"),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
+
+export const weekVideos = pgTable("week_videos", {
+  week: integer("week").primaryKey(),
+  videoUrl: text("video_url"),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});

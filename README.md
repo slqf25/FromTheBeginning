@@ -1,6 +1,6 @@
-# 起初的心
+# 起初的光
 
-A four-week Advent video and attendance journey for church communities. Participants register with a name and email, watch one video each week, record attendance, and qualify for one of two Christmas gift tiers. Administrators can review progress and export the gift list as CSV.
+Participants register with a name and email, watch one video each week, record attendance, and qualify for one of two Christmas gift tiers. Administrators can review progress and export the gift list as CSV.
 
 ## Technology
 
@@ -69,7 +69,6 @@ See [docs/architecture.md](docs/architecture.md) for dependency rules.
 | `SUPABASE_SECRET_KEY` | For Supabase | Server-only secret key; never expose to the browser |
 | `POSTGRES_URL` | For database runtime | Supabase transaction-pooler URL for serverless functions |
 | `POSTGRES_URL_NON_POOLING` | For migrations | Direct/non-pooling Postgres URL for schema tools |
-| `VIDEO_URL_1` … `VIDEO_URL_4` | For launch | YouTube or Vimeo URLs for each week |
 | `BREVO_API_KEY` | For reminders | Brevo API credential |
 | `REMINDER_FROM` | For reminders | Verified sender identity |
 | `CRON_SECRET` | For Vercel reminders | Long random value sent by Vercel as a Bearer token |
@@ -88,3 +87,7 @@ node scripts/create-admin.mjs <email> <password> ["Display Name"]
 ```
 
 The `developer` role can add and remove other admins from `/admin/manage`; the `admin` role is read/operate-only. See [docs/supabase-vercel.md](docs/supabase-vercel.md) for the Supabase setup.
+
+## Weekly video links
+
+Each week's YouTube/Vimeo link is stored in the `week_videos` table (not an environment variable) and is editable from `/admin` by any admin. Saving a link takes effect immediately — no redeploy needed. Check-in itself only depends on the campaign dates in `features/campaign/config.ts`, not on whether a video link has been set.

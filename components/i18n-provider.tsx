@@ -20,8 +20,9 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const saved = window.localStorage.getItem(STORAGE_KEY);
-    const initial: Locale = saved === "en" || saved === "zh" ? saved : navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en";
-    setLocaleState(initial);
+    const initial: Locale = saved === "en" || saved === "zh" ? saved : "zh";
+    const timer = window.setTimeout(() => setLocaleState(initial), 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {

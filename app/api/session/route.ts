@@ -2,7 +2,7 @@ import { cookies } from "next/headers";
 import { eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { participants } from "@/db/schema";
-import { SESSION_COOKIE } from "@/features/campaign/server/participant-session";
+import { getCurrentParticipant, SESSION_COOKIE } from "@/features/campaign/server/participant-session";
 
 export async function POST(request: Request) {
   const data = await request.formData();
@@ -27,6 +27,16 @@ export async function POST(request: Request) {
     console.error("Participant registration failed", error);
     return Response.json({ error: "database_unavailable" }, { status: 503 });
   }
+}
+
+export async function PATCH(request: Request) {
+  const participant = await getCurrentParticipant();
+  if (!participant) return Response.json({ error: "login_required" }, { status: 401 });
+  const body = await request.json().catch(() => null) as { remindersEnabled?: boolean } | null;
+  if (!body || typeof body.remindersEnabled !== "boolean") return Response.json({ error: "invalid_request" }, { status: 400 });
+  const db = getDb();
+  await db.update(participants).set({ remindersEnabled: body.remindersEnabled, updatedAt: new Date() }).where(eq(participants.id, participant.id));
+  return Response.json({ ok: true, remindersEnabled: body.remindersEnabled });
 }
 
 export async function DELETE() {

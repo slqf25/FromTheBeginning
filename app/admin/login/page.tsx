@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { LanguageSwitch, useI18n } from "@/components/i18n-provider";
 
 export default function AdminLoginPage() {
-  const { t } = useI18n();
+  const { t, tError } = useI18n();
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,7 @@ export default function AdminLoginPage() {
     const data = await response.json() as { error?: string };
     setLoading(false);
     if (!response.ok) {
-      setError(data.error || t("adminLogin.genericError"));
+      setError(tError(data.error, "adminLogin.genericError"));
       return;
     }
     router.push("/admin");

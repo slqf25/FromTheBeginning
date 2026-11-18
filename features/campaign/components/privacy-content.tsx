@@ -18,65 +18,59 @@ export function PrivacyContent() {
             </Link>
             <LanguageSwitch className="privacy-language-switch" />
           </div>
-          <span className="privacy-mark"><Heart size={18} fill="currentColor" /></span>
-          <p>{t("privacy.kicker")}</p>
           <h1>{t("privacy.title")}</h1>
           <span>{t("privacy.updated")}</span>
         </header>
 
-        <section>
-          <h2>{t("privacy.s1.title")}</h2>
-          <p>{t("privacy.s1.p1")}</p>
-        </section>
+        <div className="privacy-body">
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">01</span>
+            <div className="privacy-section-content"><h2>{t("privacy.s1.title")}</h2><p>{t("privacy.s1.p1")}</p></div>
+          </section>
 
-        <section>
-          <h2>{t("privacy.s2.title")}</h2>
-          <ul>
-            <li>{t("privacy.s2.i1")}</li>
-            <li>{t("privacy.s2.i2")}</li>
-            <li>{t("privacy.s2.i3")}</li>
-            <li>{t("privacy.s2.i4")}</li>
-          </ul>
-          <p>{t("privacy.s2.p1")}</p>
-        </section>
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">02</span>
+            <div className="privacy-section-content">
+              <h2>{t("privacy.s2.title")}</h2>
+              <ul><li>{t("privacy.s2.i1")}</li><li>{t("privacy.s2.i2")}</li><li>{t("privacy.s2.i3")}</li><li>{t("privacy.s2.i4")}</li></ul>
+              <p>{t("privacy.s2.p1")}</p>
+            </div>
+          </section>
 
-        <section>
-          <h2>{t("privacy.s3.title")}</h2>
-          <ul>
-            <li>{t("privacy.s3.i1")}</li>
-            <li>{t("privacy.s3.i2")}</li>
-            <li>{t("privacy.s3.i3")}</li>
-            <li>{t("privacy.s3.i4")}</li>
-          </ul>
-          <p>{t("privacy.s3.p1")}</p>
-        </section>
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">03</span>
+            <div className="privacy-section-content">
+              <h2>{t("privacy.s3.title")}</h2>
+              <ul><li>{t("privacy.s3.i1")}</li><li>{t("privacy.s3.i2")}</li><li>{t("privacy.s3.i3")}</li><li>{t("privacy.s3.i4")}</li></ul>
+              <p>{t("privacy.s3.p1")}</p>
+            </div>
+          </section>
 
-        <section>
-          <h2>{t("privacy.s4.title")}</h2>
-          <p>{t("privacy.s4.p1")}</p>
-          <p>{t("privacy.s4.p2")}</p>
-        </section>
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">04</span>
+            <div className="privacy-section-content"><h2>{t("privacy.s4.title")}</h2><p>{t("privacy.s4.p1")}</p><p>{t("privacy.s4.p2")}</p></div>
+          </section>
 
-        <section>
-          <h2>{t("privacy.s5.title")}</h2>
-          <p>{t("privacy.s5.p1")}</p>
-        </section>
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">05</span>
+            <div className="privacy-section-content"><h2>{t("privacy.s5.title")}</h2><p>{t("privacy.s5.p1")}</p></div>
+          </section>
 
-        <section>
-          <h2>{t("privacy.s6.title")}</h2>
-          <p>{t("privacy.s6.p1")}</p>
-        </section>
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">06</span>
+            <div className="privacy-section-content"><h2>{t("privacy.s6.title")}</h2><p>{t("privacy.s6.p1")}</p></div>
+          </section>
 
-        <section>
-          <h2>{t("privacy.s7.title")}</h2>
-          <p>{t("privacy.s7.p1")}</p>
-          <p>{t("privacy.s7.p2")}</p>
-        </section>
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">07</span>
+            <div className="privacy-section-content"><h2>{t("privacy.s7.title")}</h2><p>{t("privacy.s7.p1")}</p><p>{t("privacy.s7.p2")}</p></div>
+          </section>
 
-        <section>
-          <h2>{t("privacy.s8.title")}</h2>
-          <p>{t("privacy.s8.p1")}</p>
-        </section>
+          <section className="privacy-section">
+            <span className="privacy-section-number" aria-hidden="true">08</span>
+            <div className="privacy-section-content"><h2>{t("privacy.s8.title")}</h2><p>{t("privacy.s8.p1")}</p></div>
+          </section>
+        </div>
 
         <footer className="privacy-footer">
           <span className="brand"><span className="brand-mark"><Heart size={14} fill="currentColor" /></span>{t("common.brand")}</span>
