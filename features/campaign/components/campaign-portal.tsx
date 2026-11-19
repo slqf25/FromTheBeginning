@@ -24,6 +24,35 @@ function WeekLightMark({ week }: { week: number }) {
   return <svg {...common} className="week-light-mark light-mark-dawn"><path d="M4 18h16M6.2 18a5.8 5.8 0 0 1 11.6 0M12 3.4v3M5.9 6l2.05 2.05M18.1 6l-2.05 2.05M3.5 12h3M17.5 12h3" /></svg>;
 }
 
+const COMMON_EMAIL_DOMAINS = ["gmail.com", "googlemail.com", "google.com", "outlook.com", "hotmail.com", "live.com", "yahoo.com", "icloud.com", "me.com", "mac.com", "qq.com", "163.com", "126.com", "foxmail.com", "msn.com"];
+
+function domainDistance(a: string, b: string) {
+  const rows = a.length + 1;
+  const cols = b.length + 1;
+  const dp: number[][] = Array.from({ length: rows }, () => new Array(cols).fill(0));
+  for (let i = 0; i < rows; i++) dp[i][0] = i;
+  for (let j = 0; j < cols; j++) dp[0][j] = j;
+  for (let i = 1; i < rows; i++) {
+    for (let j = 1; j < cols; j++) {
+      dp[i][j] = a[i - 1] === b[j - 1] ? dp[i - 1][j - 1] : 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+    }
+  }
+  return dp[a.length][b.length];
+}
+
+function suggestEmailCorrection(email: string): string | null {
+  const at = email.lastIndexOf("@");
+  if (at === -1) return null;
+  const domain = email.slice(at + 1).trim().toLowerCase();
+  if (!domain || COMMON_EMAIL_DOMAINS.includes(domain)) return null;
+  let best: { domain: string; distance: number } | null = null;
+  for (const candidate of COMMON_EMAIL_DOMAINS) {
+    const distance = domainDistance(domain, candidate);
+    if (distance > 0 && distance <= 2 && (!best || distance < best.distance)) best = { domain: candidate, distance };
+  }
+  return best ? `${email.slice(0, at + 1)}${best.domain}` : null;
+}
+
 async function readJson<T>(response: Response): Promise<T | null> {
   const body = await response.text();
   if (!body) return null;
@@ -301,9 +330,13 @@ function ProfileMenu({ participant, onToggleReminders, onLogout }: { participant
 
 function LoginModal({ onClose, onDone }: { onClose: () => void; onDone: () => void }) {
   const { t, tError } = useI18n();
+  const [mode, setMode] = useState<"register" | "login">("register");
   const [error, setError] = useState("");
+  const [emailSuggestion, setEmailSuggestion] = useState<string | null>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
   async function submit(formData: FormData) {
     setError("");
+    formData.set("mode", mode);
     try {
       const response = await fetch("/api/session", { method: "POST", body: formData });
       const data = await readJson<{ error?: string }>(response);
@@ -313,5 +346,16 @@ function LoginModal({ onClose, onDone }: { onClose: () => void; onDone: () => vo
       setError(t("error.network"));
     }
   }
-  return <div className="modal-backdrop" onMouseDown={onClose}><div className="login-modal" onMouseDown={(e) => e.stopPropagation()}><button className="modal-close" onClick={onClose} aria-label={t("common.close")}>×</button><p className="section-kicker">{t("login.kicker")}</p><h2>{t("login.title")}</h2><form action={submit}><label>{t("login.name")}<input name="name" required minLength={2} placeholder={t("login.namePlaceholder")} /></label><label>{t("login.email")}<input name="email" required type="email" placeholder="name@example.com" /></label><label className="consent"><input name="reminders" type="checkbox" defaultChecked /><span>{t("login.reminders")}</span></label><button className="primary-btn" type="submit">{t("login.submit")} <ArrowRight size={17} /></button>{error && <p className="form-error">{error}</p>}<small>{t("login.disclaimerBefore")} <a href="/privacy" target="_blank" rel="noreferrer">{t("common.privacy")}</a>{t("login.disclaimerAfter")}</small></form></div></div>;
+  function toggleMode() {
+    setError("");
+    setMode((current) => current === "register" ? "login" : "register");
+  }
+  function handleEmailBlur(event: React.FocusEvent<HTMLInputElement>) {
+    setEmailSuggestion(suggestEmailCorrection(event.target.value));
+  }
+  function acceptEmailSuggestion() {
+    if (emailRef.current && emailSuggestion) emailRef.current.value = emailSuggestion;
+    setEmailSuggestion(null);
+  }
+  return <div className="modal-backdrop" onMouseDown={onClose}><div className="login-modal" onMouseDown={(e) => e.stopPropagation()}><button className="modal-close" onClick={onClose} aria-label={t("common.close")}>×</button><p className="section-kicker">{t("login.kicker")}</p><h2>{mode === "login" ? t("login.loginTitle") : t("login.title")}</h2><form action={submit}>{mode === "register" && <label>{t("login.name")}<input name="name" required minLength={2} placeholder={t("login.namePlaceholder")} /></label>}<label>{t("login.email")}<input ref={emailRef} name="email" required type="email" placeholder="name@example.com" onBlur={handleEmailBlur} onChange={() => setEmailSuggestion(null)} />{emailSuggestion && <button type="button" className="email-suggestion" onClick={acceptEmailSuggestion}>{t("login.emailSuggestion", { email: emailSuggestion })}</button>}</label>{mode === "register" && <label className="consent"><input name="reminders" type="checkbox" defaultChecked /><span>{t("login.reminders")}</span></label>}<button className="primary-btn" type="submit">{mode === "login" ? t("login.loginSubmit") : t("login.submit")} <ArrowRight size={17} /></button>{error && <p className="form-error">{error}</p>}{mode === "register" && <small>{t("login.disclaimerBefore")} <a href="/privacy" target="_blank" rel="noreferrer">{t("common.privacy")}</a>{t("login.disclaimerAfter")}</small>}</form><button type="button" className="mode-switch" onClick={toggleMode}>{mode === "register" ? t("login.switchToLogin") : t("login.switchToRegister")}</button></div></div>;
 }

@@ -155,6 +155,8 @@
 .login-modal small a { color:#6551c7; text-decoration:underline; text-underline-offset:2px; }
 .login-modal .primary-btn { background:#007aff; color:#fff; box-shadow:none; }
 .login-modal .primary-btn:hover { background:#1687ff; }
+.login-modal .mode-switch { display:block; width:100%; margin-top:18px; border:0; background:none; color:#6551c7; font-size:12px; text-decoration:underline; text-underline-offset:2px; cursor:pointer; }
+.login-modal .email-suggestion { display:block; margin-top:6px; border:0; background:none; padding:0; color:#b4790a; font-size:11px; letter-spacing:0; text-decoration:underline; text-underline-offset:2px; cursor:pointer; text-align:left; }
 .form-error { color:#a33831; font-size:12px; }
 .primary-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; background:rgba(255,255,255,.94); color:#171918; border:0; border-radius:999px; padding:15px 24px; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 8px 28px rgba(0,0,0,.14); transition:transform .28s cubic-bezier(.2,.8,.2,1),background .2s ease; }
 .primary-btn:hover { transform:scale(1.025); background:#fff; }
